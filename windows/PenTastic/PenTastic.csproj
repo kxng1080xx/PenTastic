@@ -1,0 +1,47 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows10.0.19041.0</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <UseWPF>true</UseWPF>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>PenTastic</RootNamespace>
+    <ApplicationIcon>PenTastic.ico</ApplicationIcon>
+    <Version>1.0.0</Version>
+    <AdbDir Condition="'$(AdbDir)' == ''">$(LOCALAPPDATA)\Android\Sdk\platform-tools</AdbDir>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <SelfContained>true</SelfContained>
+    <PublishSingleFile>true</PublishSingleFile>
+    <IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
+    <EnableCompressionInSingleFile>true</EnableCompressionInSingleFile>
+    <DebugType>none</DebugType>
+  </PropertyGroup>
+
+  <ItemGroup Condition="'$(Configuration)' == 'Release'">
+    <None Include="$(AdbDir)\adb.exe;$(AdbDir)\AdbWinApi.dll;$(AdbDir)\AdbWinUsbApi.dll;$(AdbDir)\NOTICE.txt"
+          Link="adb\%(Filename)%(Extension)" CopyToPublishDirectory="PreserveNewest" />
+  </ItemGroup>
+
+  <Target Name="NeedAdb" BeforeTargets="Build" Condition="'$(Configuration)' == 'Release' And !Exists('$(AdbDir)\adb.exe')">
+    <Error Text="adb.exe not found in $(AdbDir). Install Android SDK platform-tools or pass -p:AdbDir=&lt;folder with adb.exe&gt;." />
+  </Target>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="PenTastic.Tests" />
+    <Using Remove="System.Windows.Forms" />
+    <Using Remove="System.Drawing" />
+    <Using Include="System.IO" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="QRCoder" Version="1.8.0" />
+    <PackageReference Include="Vortice.Direct3D11" Version="3.8.3" />
+    <PackageReference Include="Vortice.MediaFoundation" Version="3.8.3" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.PenTastic" parent="@android:style/Theme.DeviceDefault.NoActionBar">
+        <item name="android:windowBackground">#FF121A26</item>
+        <item name="android:statusBarColor">#FF121A26</item>
+        <item name="android:navigationBarColor">#FF121A26</item>
+        <item name="android:windowSplashScreenBackground">#FF121A26</item>
+        <item name="android:windowSplashScreenAnimatedIcon">@drawable/ic_launcher_foreground</item>
+        <item name="android:windowSplashScreenIconBackgroundColor">#FF22304A</item>
+    </style>
+</resources>

@@ -1,0 +1,12 @@
+bin/
+obj/
+*.user
+.vs/
+.idea/
+.gradle/
+build/
+local.properties
+*.jks
+*.keystore
+keystore.properties
+dist/
